@@ -8,7 +8,7 @@ The digital inputs A, B, X, Y, Z, START, DPAD, and DLeft/DRight are all mixed ra
 //circuit photo here soon
 
 This project was utterly painful, but is my first really successful Arduino project.
-I say painful, because diagnosing bugs is absolutely painstaking when you understand as little as I do -_-
+I say painful, because diagnosing bugs is incredibly demoralising when you understand as little as I do about electronics and digital signals etc. -_-
 
 Getting the Arduino to mirror the default controls was easy enough - Nicohood had an example already for that. When it came to randomising, I decided to store controller values in an array (based on Nicohood's preset variables for each button), shuffle the array indexes of each button (in global variables, so it's not random every poll cycle), then reassign the values and write to the console. Unfortunately, this bug kept happening where the Arduino would randomly send a digital signal, usually 'A', 'B' or 'START'.
 
