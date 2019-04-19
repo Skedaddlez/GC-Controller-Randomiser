@@ -5,7 +5,7 @@ Nicohood's library: https://github.com/NicoHood/Nintendo
 
 ![Alt text](https://github.com/Skedaddlez/GC-Controller-Randomiser/blob/master/20190419_093832.jpg)
 
-The digital inputs A, B, X, Y, Z, START, DPAD, and DLeft/DRight are all mixed randomly, as are the analog inputs from the Left Stick, the C-stick, the left trigger and the right trigger. The analog shuffling in particular is alot of fun.
+When the tactile switch is pressed, the digital inputs A, B, X, Y, Z, START, DPAD, and DLeft/DRight are all mixed randomly, as are the analog inputs from the Left Stick, the C-stick, the left trigger and the right trigger. The analog shuffling in particular is alot of fun.
 
 --------------------------------------------------------------
 
