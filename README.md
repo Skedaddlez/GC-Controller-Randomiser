@@ -5,7 +5,7 @@ The digital inputs A, B, X, Y, Z, START, DPAD, and DLeft/DRight are all mixed ra
 
 --------------------------------------------------------------
 
-//circuit photo here soon
+![Alt text](relative/path/to/0190419_093832.jpg?raw=true "Title")
 
 This project was utterly painful, but is my first really successful Arduino project.
 I say painful, because diagnosing bugs is incredibly demoralising when you understand as little as I do about electronics and digital signals etc. -_-
