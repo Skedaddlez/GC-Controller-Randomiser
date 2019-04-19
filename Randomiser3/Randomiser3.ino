@@ -19,10 +19,12 @@ Gamecube_Data_t d = defaultGamecubeData;
 const int buttonPin = 2;
 int buttonState = 0;
 
+
+//Define arrays for randomiser
 uint8_t digitalstates[12] = {};
 long analogstates[6] = {};
 
-//Define array nums
+//Define button IDs
 int A = 0;
 int B = 1;
 int X = 2;
@@ -59,20 +61,24 @@ void setup()
 
 void loop()
 { 
+  //Simple button for randomising
   buttonState=digitalRead(buttonPin);
   if (buttonState==HIGH){
     digitalWrite(pinLed, HIGH);
     randomise();
   }else{
     digitalWrite(pinLed, LOW);
+    
    // Try to read the controller data
     if (GamecubeController1.read())
     {
+      
       //get report
       auto r = GamecubeController1.getReport();
 
       //--------------------------------------
-    
+
+      //read and write analog states based on button IDs
       analogstates[0]=r.xAxis;
       d.report.xAxis=analogstates[XA];
       
@@ -91,7 +97,7 @@ void loop()
       analogstates[5]=r.right;
       d.report.right=analogstates[RIGHT];   
       
-      //byte 1
+      //read and write digital byte 1
       byte newbut0 = 0b00000000;
       digitalstates[0] = bitRead(r.buttons0, 0);
       bitWrite(newbut0, 0, digitalstates[A]);
@@ -114,7 +120,7 @@ void loop()
 
       bitWrite(newbut0, 7, bitRead(r.buttons0, 7));
 
-      //byte 2
+      //read and write digital byte 2
       byte newbut1 = 0b00000000;
       digitalstates[5] = bitRead(r.buttons1, 0);
       bitWrite(newbut1, 0, digitalstates[DL]);
@@ -138,19 +144,21 @@ void loop()
       bitWrite(newbut1, 6, digitalstates[L]);
 
       bitWrite(newbut1, 7, bitRead(r.buttons1, 7));
-      
+
+      //write the bytes to a controller report
       d.report.buttons0 = newbut0;
       d.report.buttons1 = newbut1;
 
       //--------------------------------------
-       
+      //write the report to the gamecube
       GamecubeConsole1.write(d);   
       }
   }
 }
 
 void randomise(){
-  uint8_t x[36];
+  //shuffle digitals
+  uint8_t x[12];
   for (size_t i = 0; i < 12; i++) x[i] = i;
   for (size_t i = 0; i < 12; i++) {
     size_t j = random(i, 11);
@@ -160,6 +168,7 @@ void randomise(){
     x[i] = x[j];
     x[j] = t;
   }
+  //assign random button IDs
   A = x[0];
   B = x[1];
   X = x[2];
@@ -173,6 +182,7 @@ void randomise(){
   R = x[10];
   L = x[11];
 
+  //shuffle analogs
   uint8_t y[6];
   for (size_t i = 0; i < 6; i++) y[i] = i;
   for (size_t i = 0; i < 6; i++) {
@@ -183,7 +193,7 @@ void randomise(){
     y[i] = y[j];
     y[j] = t;
   }
-  
+  //assign random analog button IDs
   XA = y[0];
   YA = y[1];
   CX = y[2];
